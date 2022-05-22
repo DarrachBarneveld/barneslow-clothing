@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 // import { CartProvider } from "./contexts/cart.context";
 import { store, persistor } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./utils/stripe/stripe.utils";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -21,7 +23,9 @@ root.render(
       <BrowserRouter>
         {/* <UserProvider> */}
         {/* <CartProvider> */}
-        <App />
+        <Elements stripe={stripePromise}>
+          <App />
+        </Elements>
         {/* </CartProvider> */}
         {/* </UserProvider> */}
       </BrowserRouter>
