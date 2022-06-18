@@ -14,13 +14,17 @@ import {
   CartItems,
 } from "./cart-dropdown.styles";
 
+import { useCallback, useState } from "react";
+
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
+  const [temp, setTemp] = useState("A");
 
-  const goToCheckoutHandler = () => {
+  const goToCheckoutHandler = useCallback(() => {
     navigate("/checkout");
-  };
+  }, []);
+
   return (
     <CartDropdownContainer>
       <CartItems>
@@ -31,6 +35,7 @@ const CartDropdown = () => {
         )}
       </CartItems>
       <Button onClick={goToCheckoutHandler}>CHECKOUT</Button>
+      <Button onClick={goToCheckoutHandler}>Update</Button>
     </CartDropdownContainer>
   );
 };

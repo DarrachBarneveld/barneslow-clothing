@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 
 import ProductCard from "../../components/product-card/product-card.component";
 import Spinner from "../../components/spinner/spinner.component";
-import "./category.styles";
+
+import { CategoryContainer, Title } from "./category.styles";
 
 import {
   selectCategoriesMap,
@@ -28,18 +29,20 @@ const Category = () => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
 
+  console.log("category");
+
   return (
     <Fragment>
-      <h2 className="title">{category.toUpperCase()}</h2>
+      <Title className="title">{category.toUpperCase()}</Title>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="category-container">
+        <CategoryContainer className="category-container">
           {products &&
             products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-        </div>
+        </CategoryContainer>
       )}
     </Fragment>
   );
