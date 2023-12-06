@@ -21,10 +21,11 @@ const addCartItem = (cartItems, productToAdd) => {
 
 const removeCartItem = (cartItems, cartItemToRemove) => {
   // find cart item to remove
-  const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === cartItemToRemove.id,
-  );
+  const existingCartItem = cartItems.find((cartItem) => {
+    return cartItem.id === cartItemToRemove.id;
+  });
 
+  console.log(existingCartItem);
   // check if quantity is equal to 1, if true, remove from cart
   if (existingCartItem.quantity === 1) {
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
@@ -38,6 +39,13 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   );
 };
 
+// {
+//   id: 19,
+//   imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
+//   name: "Blue Jean Jacket",
+//   price: 90,
+//   quantity: 1,
+// },
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -59,6 +67,8 @@ const cartSlice = createSlice({
       state.cartTotal = newCartTotal;
     },
     removeItemFromCart(state, action) {
+      const itemToRemove = action.payload;
+      console.log(action.payload);
       const newCart = removeCartItem(state.cartItems, action.payload);
       const newCartTotal = state.cartTotal - action.payload.price;
 

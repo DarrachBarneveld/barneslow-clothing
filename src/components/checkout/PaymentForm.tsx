@@ -36,7 +36,6 @@ const PaymentForm = () => {
       },
     });
 
-    console.log(paymentResult);
     setIsProcessingPayment(false);
 
     if (paymentResult.error) {
@@ -50,10 +49,16 @@ const PaymentForm = () => {
 
   return (
     <div className="flex h-[300px] flex-col items-center justify-center">
-      <form className="h-[100px] max-w-[500px]" onSubmit={paymentHandler}>
+      <form
+        className="h-[100px] w-full max-w-[500px]"
+        onSubmit={paymentHandler}
+      >
         <h2>Credit Card Payment: </h2>
         <CardElement />
-        <button className="ml-auto mt-[30px]" disabled={isProcessingPayment}>
+        <button
+          className="mt-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
+          disabled={isProcessingPayment}
+        >
           PAY NOW
         </button>
       </form>
