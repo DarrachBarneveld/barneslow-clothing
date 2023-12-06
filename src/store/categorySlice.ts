@@ -32,7 +32,7 @@ const categorySlice = createSlice({
   name: "category",
   initialState: {
     categoryDocuments: null,
-    categoryMap: null,
+    loading: false,
   },
   reducers: {},
 
@@ -61,7 +61,7 @@ const categorySlice = createSlice({
   },
 });
 
-export const authActions = categorySlice.actions;
+export const categoryActions = categorySlice.actions;
 
 export default categorySlice;
 

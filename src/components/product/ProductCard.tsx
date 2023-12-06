@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../store/cartSlice";
 
 export type Product = {
   id: string;
@@ -13,8 +14,13 @@ interface ProductCardProps {
 
 const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
   const { name, price, imageUrl } = product;
-  // const { addItemToCart } = useContext(CartContext);
   const dispatch = useDispatch();
+
+  const { cartItems, cartTotal, cartCount } = useSelector(
+    (state) => state.cart,
+  );
+
+  console.log(cartItems, cartTotal, cartCount);
 
   return (
     <div className="product-card-container">
@@ -23,7 +29,9 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
-      <button onClick={() => console.log("hello")}>Add to Cart</button>
+      <button onClick={() => dispatch(cartActions.addItemToCart(product))}>
+        Add to Cart
+      </button>
     </div>
   );
 };
