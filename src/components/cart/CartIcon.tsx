@@ -12,9 +12,9 @@ const CartIcon = () => {
 
   return (
     <button onClick={toggleIsCartOpen} className="relative">
-      <FaCartShopping className="text-4xl text-sky-600" />
+      <FaCartShopping className="text-4xl text-stone-300" />
       {isCartOpen && <CartDropdown />}
-      <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform font-bold text-white">
+      <div className="absolute left-1/2 top-1/3 z-10 -translate-x-1/2 -translate-y-1/2 transform font-extrabold text-amber-700">
         {cartCount}
       </div>
     </button>

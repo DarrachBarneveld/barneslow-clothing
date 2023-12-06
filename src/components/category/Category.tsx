@@ -23,7 +23,9 @@ const Category: FunctionComponent<CategoryProps> = () => {
 
   return (
     <>
-      <h2 className="title">{category.toUpperCase()}</h2>
+      <h2 className="my-3 text-3xl font-extrabold underline">
+        {category.toUpperCase()}
+      </h2>
       {loading ? (
         <h1>Loading</h1>
       ) : (
