@@ -12,8 +12,9 @@ const Navbar: FC<NavbarProps> = () => {
   const { userAuth } = auth;
 
   return (
-    <nav className="flex items-center justify-between bg-gray-800 p-4 text-white">
-      <div>
+    <nav className="flex w-full items-center justify-between bg-gray-800 p-4 text-white">
+      <h1>Barneslow Clothing</h1>
+      <div className="flex items-center justify-center gap-4">
         {userAuth ? (
           <>
             <button

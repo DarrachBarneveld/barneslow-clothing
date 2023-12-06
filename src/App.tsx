@@ -19,14 +19,18 @@ function App() {
   }, []);
 
   return (
-    <main className="flex min-h-screen min-w-[100vw] flex-col items-center justify-center bg-sky-300">
-      <Navbar />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="shop/*" element={<Shop />} />
-        <Route path="checkout" element={<Checkout />} />
-      </Routes>
-    </main>
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <main className="flex min-h-screen min-w-[100vw] flex-col items-center justify-center bg-sky-300">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="shop/*" element={<Shop />} />
+          <Route path="checkout" element={<Checkout />} />
+        </Routes>
+      </main>
+    </>
   );
 }
 

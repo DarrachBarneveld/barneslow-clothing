@@ -56,7 +56,7 @@ const PaymentForm = () => {
         <h2>Credit Card Payment: </h2>
         <CardElement />
         <button
-          className="mt-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
+          className="mt-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 focus:bg-blue-700"
           disabled={isProcessingPayment}
         >
           PAY NOW
