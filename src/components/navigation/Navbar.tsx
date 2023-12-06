@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { loginUserAction, logoutUserAction } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CartIcon from "../cart/CartIcon";
 
 interface NavbarProps {}
 
@@ -14,12 +15,15 @@ const Navbar: FC<NavbarProps> = () => {
     <nav className="flex items-center justify-between bg-gray-800 p-4 text-white">
       <div>
         {userAuth ? (
-          <button
-            onClick={() => dispatch(logoutUserAction())}
-            className="rounded bg-green-500 px-4 py-2 text-white"
-          >
-            Logout
-          </button>
+          <>
+            <button
+              onClick={() => dispatch(logoutUserAction())}
+              className="rounded bg-green-500 px-4 py-2 text-white"
+            >
+              Logout
+            </button>
+            <CartIcon />
+          </>
         ) : (
           <button
             onClick={() => dispatch(loginUserAction())}
