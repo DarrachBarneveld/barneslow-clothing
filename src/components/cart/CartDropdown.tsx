@@ -2,9 +2,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import CartItem from "./CartItem";
+import { RootCartState } from "../../store/cartSlice";
 
 const CartDropdown = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state: RootCartState) => state.cart);
   const navigate = useNavigate();
 
   const goToCheckoutHandler = () => {

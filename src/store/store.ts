@@ -17,3 +17,5 @@ export const store = configureStore({
       serializableCheck: false,
     }),
 });
+
+export type AppDispatch = typeof store.dispatch;

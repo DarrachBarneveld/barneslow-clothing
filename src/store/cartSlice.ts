@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ProductWithQuantity } from "../lib/types";
 
-const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (
+  cartItems: ProductWithQuantity[],
+  productToAdd: ProductWithQuantity,
+) => {
   // cartItems contains productToAdd
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id,
@@ -19,15 +23,17 @@ const addCartItem = (cartItems, productToAdd) => {
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
-const removeCartItem = (cartItems, cartItemToRemove) => {
+const removeCartItem = (
+  cartItems: ProductWithQuantity[],
+  cartItemToRemove: ProductWithQuantity,
+) => {
   // find cart item to remove
   const existingCartItem = cartItems.find((cartItem) => {
     return cartItem.id === cartItemToRemove.id;
   });
 
-  console.log(existingCartItem);
   // check if quantity is equal to 1, if true, remove from cart
-  if (existingCartItem.quantity === 1) {
+  if (existingCartItem && existingCartItem.quantity === 1) {
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
   }
 
@@ -39,17 +45,21 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   );
 };
 
-// {
-//   id: 19,
-//   imageUrl: "https://i.ibb.co/mJS6vz0/blue-jean-jacket.png",
-//   name: "Blue Jean Jacket",
-//   price: 90,
-//   quantity: 1,
-// },
+export interface RootCartState {
+  cart: CartState;
+}
+
+interface CartState {
+  cartItems: ProductWithQuantity[];
+  isCartOpen: boolean;
+  cartCount: number;
+  cartTotal: number;
+}
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    cartItems: [],
+    cartItems: [] as ProductWithQuantity[],
     isCartOpen: false,
     cartCount: 0,
     cartTotal: 0,
@@ -67,8 +77,6 @@ const cartSlice = createSlice({
       state.cartTotal = newCartTotal;
     },
     removeItemFromCart(state, action) {
-      const itemToRemove = action.payload;
-      console.log(action.payload);
       const newCart = removeCartItem(state.cartItems, action.payload);
       const newCartTotal = state.cartTotal - action.payload.price;
 

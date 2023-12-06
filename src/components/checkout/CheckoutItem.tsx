@@ -1,10 +1,11 @@
+import { FunctionComponent } from "react";
 import { cartActions } from "../../store/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { CartItemProps } from "../cart/CartItem";
 
-const CheckoutItem = ({ cartItem }) => {
+const CheckoutItem: FunctionComponent<CartItemProps> = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart);
 
   const addItemHandler = () => dispatch(cartActions.addItemToCart(cartItem));
 

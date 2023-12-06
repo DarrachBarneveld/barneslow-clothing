@@ -45,9 +45,6 @@ export const logoutUserAction = createAsyncThunk(
 
       return user;
     } catch (error) {
-      if (error) {
-        throw error;
-      }
       return rejectWithValue(error);
     }
   },
@@ -113,6 +110,3 @@ const authSlice = createSlice({
 export const authActions = authSlice.actions;
 
 export default authSlice;
-
-// state.appError = undefined;
-// state.serverError = undefined;

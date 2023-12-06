@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
 
 export type Product = {
@@ -15,12 +15,6 @@ interface ProductCardProps {
 const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
-
-  const { cartItems, cartTotal, cartCount } = useSelector(
-    (state) => state.cart,
-  );
-
-  console.log(cartItems, cartTotal, cartCount);
 
   return (
     <div className="relative flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">

@@ -1,27 +1,35 @@
 import { FC, useState } from "react";
 import { GiClothes } from "react-icons/gi";
-import { loginUserAction, logoutUserAction } from "../../store/authSlice";
+import {
+  RootAuthState,
+  loginUserAction,
+  logoutUserAction,
+} from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CartIcon from "../cart/CartIcon";
 import { NavLink } from "react-router-dom";
+import { AppDispatch } from "../../store/store";
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const auth = useSelector((state: RootAuthState) => state.auth);
   const [mobileView, setMobileView] = useState(false);
 
   const { userAuth } = auth;
 
   return (
-    <nav className="flex flex-wrap items-center justify-between bg-indigo-900 p-3">
-      <div className="mr-6 flex flex-shrink-0 items-center text-white">
+    <nav className="flex flex-wrap items-center justify-between bg-slate-900 p-3">
+      <NavLink
+        to="/"
+        className="mr-6 flex flex-shrink-0 items-center text-white"
+      >
         <GiClothes className="mr-2 text-4xl" />
         <span className="text-xl font-semibold tracking-tight">
           Barneslow Clothing
         </span>
-      </div>
+      </NavLink>
       <div className="block lg:hidden">
         <button
           className="flex items-center rounded border border-sky-400 px-3 py-2 text-sky-200 hover:border-white hover:text-white"
@@ -44,31 +52,31 @@ const Navbar: FC<NavbarProps> = () => {
       >
         <div className="text-sm lg:flex-grow">
           <NavLink
-            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-sky-600 lg:mt-0 lg:inline-block"
+            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-indigo-100 hover:text-indigo-900 focus:bg-indigo-100 focus:text-indigo-900 lg:mt-0 lg:inline-block"
             to={`shop/hats`}
           >
             Hats
           </NavLink>
           <NavLink
-            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-sky-600 lg:mt-0 lg:inline-block"
+            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-indigo-100 hover:text-indigo-900 focus:bg-indigo-100 focus:text-indigo-900 lg:mt-0 lg:inline-block"
             to={`shop/jackets`}
           >
             Jackets
           </NavLink>
           <NavLink
-            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-sky-600 lg:mt-0 lg:inline-block"
+            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-indigo-100 hover:text-indigo-900 focus:bg-indigo-100 focus:text-indigo-900 lg:mt-0 lg:inline-block"
             to={`shop/sneakers`}
           >
             Sneakers
           </NavLink>
           <NavLink
-            className="mr-4 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-sky-600 lg:mt-0 lg:inline-block"
+            className="mr-4 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-indigo-100 hover:text-indigo-900 focus:bg-indigo-100 focus:text-indigo-900 lg:mt-0 lg:inline-block"
             to={`shop/womens`}
           >
             Womens
           </NavLink>
           <NavLink
-            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-sky-600 lg:mt-0 lg:inline-block"
+            className="mr-1 mt-4 block rounded-md px-2 py-1 text-base text-slate-50 hover:bg-indigo-100 hover:text-indigo-900 focus:bg-indigo-100 focus:text-indigo-900  lg:mt-0 lg:inline-block"
             to={`shop/mens`}
           >
             Mens
@@ -79,14 +87,14 @@ const Navbar: FC<NavbarProps> = () => {
             {userAuth ? (
               <button
                 onClick={() => dispatch(logoutUserAction())}
-                className="rounded bg-amber-500 px-4 py-2 text-white hover:bg-amber-700 focus:bg-amber-700"
+                className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700 focus:bg-green-700"
               >
                 Logout
               </button>
             ) : (
               <button
                 onClick={() => dispatch(loginUserAction())}
-                className="rounded bg-amber-500 px-4 py-2 text-white hover:bg-amber-700 focus:bg-amber-700"
+                className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700 focus:bg-green-700"
               >
                 Login
               </button>

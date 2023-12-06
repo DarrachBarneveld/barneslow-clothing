@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
+import { RootCartState } from "../../store/cartSlice";
+import { RootAuthState } from "../../store/authSlice";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { cartTotal } = useSelector((state) => state.cart);
-  const { userAuth } = useSelector((state) => state.auth);
+  const { cartTotal } = useSelector((state: RootCartState) => state.cart);
+  const { userAuth } = useSelector((state: RootAuthState) => state.auth);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
-  const paymentHandler = async (e) => {
+  const paymentHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!stripe || !elements) {
       return;
@@ -27,9 +29,15 @@ const PaymentForm = () => {
 
     const clientSecret = response.paymentIntent.client_secret;
 
+    const cardElement = elements.getElement(CardElement);
+
+    if (!cardElement) {
+      return "There was an error retrieving the card element";
+    }
+
     const paymentResult = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-        card: elements.getElement(CardElement),
+        card: cardElement,
         billing_details: {
           name: userAuth ? userAuth.displayName : "Guest",
         },

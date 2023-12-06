@@ -1,13 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
+import { FunctionComponent, MouseEvent } from "react";
+import { ProductWithQuantity } from "../../lib/types";
 
-const CartItem = ({ cartItem }) => {
+export interface CartItemProps {
+  cartItem: ProductWithQuantity;
+}
+
+const CartItem: FunctionComponent<CartItemProps> = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart);
 
-  const removeItemHandler = (e) => {
+  const removeItemHandler = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     dispatch(cartActions.removeItemFromCart(cartItem));
   };
@@ -47,13 +52,3 @@ const CartItem = ({ cartItem }) => {
 };
 
 export default CartItem;
-
-// <div>
-//   <img src={imageUrl} alt={`${name}`} />
-//   <div>
-//     <span>
-//       {name} x {quantity}
-//     </span>
-//     <span>€{price}</span>
-//   </div>
-// </div>

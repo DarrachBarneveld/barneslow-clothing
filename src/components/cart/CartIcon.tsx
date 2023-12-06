@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 
-import { cartActions } from "../../store/cartSlice";
+import { RootCartState, cartActions } from "../../store/cartSlice";
 import CartDropdown from "./CartDropdown";
 
 const CartIcon = () => {
   const dispatch = useDispatch();
-  const { isCartOpen, cartCount } = useSelector((state) => state.cart);
+  const { isCartOpen, cartCount } = useSelector(
+    (state: RootCartState) => state.cart,
+  );
 
   const toggleIsCartOpen = () => dispatch(cartActions.setIsCartOpen());
 
