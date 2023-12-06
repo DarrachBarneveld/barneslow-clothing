@@ -8,6 +8,7 @@ import "./App.css";
 import { checkUserSessionAction } from "./store/authSlice";
 import Navbar from "./components/navigation/Navbar";
 import Shop from "./routes/Shop";
+import Checkout from "./routes/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="shop/*" element={<Shop />} />
+        <Route path="checkout" element={<Checkout />} />
       </Routes>
     </main>
   );
