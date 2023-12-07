@@ -48,8 +48,8 @@ export const signInWithGoogleRedirect = () =>
 export const db = getFirestore();
 
 export const addCollectionAndDocuments = async (
-  collectionKey,
-  documentsToAdd
+  collectionKey: string,
+  documentsToAdd: any[],
 ) => {
   const collectionRef = collection(db, collectionKey);
 
@@ -61,7 +61,6 @@ export const addCollectionAndDocuments = async (
   });
 
   await batch.commit();
-  console.log("done");
 };
 
 export const getCategoriesAndDocuments = async () => {
@@ -82,8 +81,8 @@ export const getCategoriesAndDocuments = async () => {
 };
 
 export const createUserDocumentFromAuth = async (
-  userAuth,
-  additionalInformation = {}
+  userAuth: any,
+  additionalInformation = {},
 ) => {
   if (!userAuth) return;
 
@@ -104,26 +103,32 @@ export const createUserDocumentFromAuth = async (
         ...additionalInformation,
       });
     } catch (err) {
-      console.log(`error creating user`, err.message);
+      console.log(`error creating user`, err);
     }
   }
 
   return userSnapShot;
 };
 
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string,
+) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+export const signInAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string,
+) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) =>
+export const onAuthStateChangedListener = (callback: any) =>
   onAuthStateChanged(auth, callback);
 
 export const getCurrentUser = () => {
@@ -134,7 +139,7 @@ export const getCurrentUser = () => {
         unsubscribe();
         resolve(userAuth);
       },
-      reject
+      reject,
     );
   });
 };
