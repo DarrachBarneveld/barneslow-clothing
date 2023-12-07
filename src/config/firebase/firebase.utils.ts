@@ -112,8 +112,6 @@ export const fetchUserOrders = async (userId: string) => {
   }
 };
 
-export default fetchUserOrders;
-
 export const createUserDocumentFromAuth = async (
   userAuth: any,
   additionalInformation = {},

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  createUserDocumentFromAuth,
   getCurrentUser,
   signInWithGooglePopup,
   signOutUser,
@@ -25,6 +26,8 @@ export const loginUserAction = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { user } = await signInWithGooglePopup();
+
+      const doc = await createUserDocumentFromAuth(user);
 
       return user;
     } catch (error) {
