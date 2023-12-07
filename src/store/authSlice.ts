@@ -26,7 +26,6 @@ export const loginUserAction = createAsyncThunk(
     try {
       const { user } = await signInWithGooglePopup();
 
-      console.log(user);
       return user;
     } catch (error) {
       if (!error) {
@@ -73,8 +72,6 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(checkUserSessionAction.fulfilled, (state, action) => {
-      console.log(action.payload);
-
       state.userAuth = action.payload;
       state.loading = false;
     });

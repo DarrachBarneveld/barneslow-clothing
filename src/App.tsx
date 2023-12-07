@@ -10,6 +10,7 @@ import Navbar from "./components/navigation/Navbar";
 import Shop from "./routes/Shop";
 import Checkout from "./routes/Checkout";
 import { AppDispatch } from "./store/store";
+import Profile from "./routes/Profile";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,6 +29,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="shop/*" element={<Shop />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="profile" element={<Profile />} />
         </Routes>
       </main>
     </>

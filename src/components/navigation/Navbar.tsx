@@ -5,6 +5,7 @@ import {
   loginUserAction,
   logoutUserAction,
 } from "../../store/authSlice";
+import { FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import CartIcon from "../cart/CartIcon";
 import { NavLink } from "react-router-dom";
@@ -85,12 +86,21 @@ const Navbar: FC<NavbarProps> = () => {
         <div>
           <div className="mt-2 flex items-center justify-between gap-4">
             {userAuth ? (
-              <button
-                onClick={() => dispatch(logoutUserAction())}
-                className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700 focus:bg-green-700"
-              >
-                Logout
-              </button>
+              <>
+                <NavLink
+                  to="profile"
+                  className="flex items-center gap-1 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700 focus:bg-green-700"
+                >
+                  <FaUser />
+                  <span>{userAuth.displayName}</span>
+                </NavLink>
+                <button
+                  onClick={() => dispatch(logoutUserAction())}
+                  className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700 focus:bg-green-700"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <button
                 onClick={() => dispatch(loginUserAction())}

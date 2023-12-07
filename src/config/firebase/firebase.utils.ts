@@ -20,6 +20,7 @@ import {
   query,
   getDocs,
   addDoc,
+  where,
 } from "firebase/firestore";
 import { OrderData } from "../../lib/types";
 
@@ -89,6 +90,29 @@ export const saveSuccessfullPaymentOrder = async (orderData: OrderData) => {
     throw error;
   }
 };
+
+export const fetchUserOrders = async (userId: string) => {
+  try {
+    const ordersCollection = collection(db, "orders");
+    const userOrdersQuery = query(
+      ordersCollection,
+      where("customer.id", "==", userId),
+    );
+    const userOrdersSnapshot = await getDocs(userOrdersQuery);
+
+    const userOrders = userOrdersSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return userOrders;
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    throw error;
+  }
+};
+
+export default fetchUserOrders;
 
 export const createUserDocumentFromAuth = async (
   userAuth: any,
