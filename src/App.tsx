@@ -9,9 +9,10 @@ import { checkUserSessionAction } from "./store/authSlice";
 import Navbar from "./components/navigation/Navbar";
 import Shop from "./routes/Shop";
 import Checkout from "./routes/Checkout";
+import { AppDispatch } from "./store/store";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(checkUserSessionAction());
