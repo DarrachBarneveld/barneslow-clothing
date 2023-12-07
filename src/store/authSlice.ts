@@ -56,6 +56,7 @@ export interface RootAuthState {
 
 interface AuthState {
   userAuth: any;
+  loading: boolean;
 }
 
 const authSlice = createSlice({

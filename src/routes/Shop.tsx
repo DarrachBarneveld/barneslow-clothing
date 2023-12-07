@@ -3,11 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getCategoriesAndDocumentsAction } from "../store/categorySlice";
 import Category from "../components/category/Category";
+import { AppDispatch } from "../store/store";
 
 interface ShopProps {}
 
 const Shop: FunctionComponent<ShopProps> = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(getCategoriesAndDocumentsAction());

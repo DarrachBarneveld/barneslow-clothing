@@ -1,6 +1,12 @@
+import { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
+import { Category } from "../../lib/types";
 
-const DirectoryItem = ({ category }) => {
+interface DirectoryItemProps {
+  category: Category;
+}
+
+const DirectoryItem: FunctionComponent<DirectoryItemProps> = ({ category }) => {
   const { imageUrl, title, route } = category;
   const navigate = useNavigate();
 

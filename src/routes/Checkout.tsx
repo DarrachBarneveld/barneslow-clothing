@@ -1,9 +1,12 @@
 import { useSelector } from "react-redux";
 import CheckoutItem from "../components/checkout/CheckoutItem";
 import PaymentForm from "../components/checkout/PaymentForm";
+import { RootCartState } from "../store/cartSlice";
 
 const Checkout = () => {
-  const { cartItems, cartTotal } = useSelector((state) => state.cart);
+  const { cartItems, cartTotal } = useSelector(
+    (state: RootCartState) => state.cart,
+  );
 
   return (
     <div className="h-screen bg-gray-100 py-8 md:min-w-fit">
