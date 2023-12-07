@@ -19,7 +19,9 @@ import {
   writeBatch,
   query,
   getDocs,
+  addDoc,
 } from "firebase/firestore";
+import { OrderData } from "../../lib/types";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDFBPjZ93OyzmEvgQT38FazSj6v5SkR9Rk",
@@ -71,13 +73,21 @@ export const getCategoriesAndDocuments = async () => {
   const querySnapshot = await getDocs(q);
 
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+};
 
-  // const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-  //   const { title, items } = docSnapshot.data();
+export const saveSuccessfullPaymentOrder = async (orderData: OrderData) => {
+  try {
+    const ordersCollection = collection(db, "orders");
 
-  //   acc[title.toLowerCase()] = items;
-  //   return acc;
-  // }, {});
+    const newOrderRef = await addDoc(ordersCollection, orderData);
+
+    console.log("Order added with ID: ", newOrderRef.id);
+
+    return newOrderRef.id;
+  } catch (error) {
+    console.error("Error saving order:", error);
+    throw error;
+  }
 };
 
 export const createUserDocumentFromAuth = async (

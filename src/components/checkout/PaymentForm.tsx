@@ -3,11 +3,17 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 import { RootCartState } from "../../store/cartSlice";
 import { RootAuthState } from "../../store/authSlice";
+import { Customer, OrderData } from "../../lib/types";
+import { saveSuccessfullPaymentOrder } from "../../config/firebase/firebase.utils";
+import Stripe from "stripe";
+import { v4 as uuidv4 } from "uuid";
 
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const { cartTotal } = useSelector((state: RootCartState) => state.cart);
+  const { cartTotal, cartItems } = useSelector(
+    (state: RootCartState) => state.cart,
+  );
   const { userAuth } = useSelector((state: RootAuthState) => state.auth);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
@@ -50,6 +56,18 @@ const PaymentForm = () => {
       alert(paymentResult.error.message);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
+        const customer: Customer = {
+          id: userAuth?.uid || uuidv4(),
+          name: userAuth?.displayName || "Guest",
+          email: userAuth?.email || "guest@gmail.com",
+        };
+
+        const orderData: OrderData = {
+          customer,
+          paymentIntent: paymentResult.paymentIntent as Stripe.PaymentIntent, //unsure about this
+          items: cartItems,
+        };
+        await saveSuccessfullPaymentOrder(orderData);
         alert("PAYMENT SUCCESSFUL");
       }
     }
