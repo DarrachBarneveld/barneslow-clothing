@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
 import { RootAuthState } from "../store/authSlice";
 import fetchUserOrders from "../config/firebase/firebase.utils";
 import { DocumentData } from "firebase/firestore";
@@ -26,8 +25,8 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   return (
     <div className="w-full p-4">
       <h1>Hi {userAuth?.displayName}</h1>
-      {orders.map((order) =>
-        order.items.map((item) => {
+      {orders.map((order: any) =>
+        order.items.map((item: any) => {
           const { imageUrl, name, price, quantity } = item;
 
           const date = new Date(order.paymentIntent.created * 1000);
