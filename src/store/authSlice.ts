@@ -27,7 +27,7 @@ export const loginUserAction = createAsyncThunk(
     try {
       const { user } = await signInWithGooglePopup();
 
-      const doc = await createUserDocumentFromAuth(user);
+      await createUserDocumentFromAuth(user);
 
       return user;
     } catch (error) {
