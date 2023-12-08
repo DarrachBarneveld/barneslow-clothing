@@ -13,7 +13,7 @@ const Order: FunctionComponent<OrderProps> = ({ order }) => {
   return (
     <>
       {order.items.map((item: any) => {
-        const { imageUrl, name, price, quantity } = item;
+        const { imageUrl, name, price, quantity, category } = item;
 
         const date = new Date(order.paymentIntent.created * 1000);
         return (
@@ -78,21 +78,19 @@ const Order: FunctionComponent<OrderProps> = ({ order }) => {
               </div>
               <div className="flex gap-4">
                 <Link
-                  to="shop"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  to={`/shop/${category}`}
+                  className="flex items-center text-center font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   View Product
                 </Link>
                 <span className="h-full w-[1px] bg-slate-300"></span>
-                <div className="flex">
-                  <button
-                    type="button"
-                    onClick={() => dispatch(cartActions.addItemToCart(item))}
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Buy Again
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => dispatch(cartActions.addItemToCart(item))}
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Buy Again
+                </button>
               </div>
             </div>
           </div>

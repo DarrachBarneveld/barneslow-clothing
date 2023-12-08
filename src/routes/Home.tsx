@@ -7,7 +7,7 @@ import { db } from "../config/firebase/firebase.utils";
 interface HomeProps {}
 
 const Home: FunctionComponent<HomeProps> = () => {
-  const getRandomFloat = (min, max) => {
+  const getRandomFloat = (min: number, max: number): number => {
     const randomFloat = Math.random() * (max - min) + min;
     return parseFloat(randomFloat.toFixed(2));
   };
@@ -38,7 +38,7 @@ const Home: FunctionComponent<HomeProps> = () => {
   return (
     <div className="w-full">
       <Directory />
-      <button onClick={updateDocuments}>update</button>
+      {/* <button onClick={updateDocuments}>update</button> */}
       <Outlet />
     </div>
   );
