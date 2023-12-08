@@ -8,13 +8,17 @@ export type Product = {
   name: string;
   price: number;
   imageUrl: string;
+  rating: number;
 };
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
-  const { name, price, imageUrl } = product;
+  const { name, price, imageUrl, rating } = product;
+
+  const roundedRating = Math.round(rating);
+
   const dispatch = useDispatch();
 
   return (
@@ -36,14 +40,17 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
               ${price * 1.5}
             </span>
           </p>
-          <div className="flex items-center">
-            <FaStar className="text-base text-yellow-300" />
-            <FaStar className="text-base text-yellow-300" />
-            <FaStar className="text-base text-yellow-300" />
-            <FaStar className="text-base text-yellow-300" />
-            <FaStar className="text-base text-yellow-300" />
-            <span className="ml-3 mr-2 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
-              5.0
+          <div className="ml-2 flex w-full items-center justify-between">
+            <div className="flex">
+              {[...Array(roundedRating)].map((_, index) => (
+                <FaStar
+                  key={roundedRating + index}
+                  className="text-base text-yellow-300"
+                />
+              ))}
+            </div>
+            <span className="ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
+              {rating}
             </span>
           </div>
         </div>
